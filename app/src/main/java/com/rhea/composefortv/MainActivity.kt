@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Surface
+import com.rhea.composefortv.ui.AppNavHost
 import com.rhea.composefortv.ui.theme.ComposeForTVTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
           modifier = Modifier.fillMaxSize(),
           shape = RectangleShape
         ) {
+          AppNavHost()
         }
       }
     }
