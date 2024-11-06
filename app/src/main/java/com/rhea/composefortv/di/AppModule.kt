@@ -17,7 +17,7 @@ class AppModule {
   @Singleton
   fun provideRetrofit(): Retrofit {
     return Retrofit.Builder()
-      .baseUrl("https://newsapi.org/v2/")
+      .baseUrl("https://api.themoviedb.org/3/")
       .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
       .build()
   }
