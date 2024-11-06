@@ -69,4 +69,7 @@ dependencies {
   implementation(libs.hilt.android)
   implementation(libs.androidx.hilt.navigation.compose)
   ksp(libs.hilt.compiler)
+
+  implementation(libs.retrofit)
+  implementation(libs.moshi)
 }
