@@ -1,3 +1,7 @@
 package com.rhea.composefortv.data.models
 
-data class Category(val name: String, val movieList: List<Movie>)
+data class Category(
+  val movies: List<Movie>,
+  val id: Int,
+  val title: String
+)
