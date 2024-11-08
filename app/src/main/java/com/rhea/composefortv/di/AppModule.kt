@@ -1,10 +1,15 @@
 package com.rhea.composefortv.di
 
+import android.content.Context
 import com.rhea.composefortv.data.remote.ApiService
+import com.rhea.composefortv.domain.NetworkBoundResource
+import com.rhea.composefortv.domain.repo.MovieRepository
+import com.rhea.composefortv.domain.repo.MovieRepositoryImpl
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
