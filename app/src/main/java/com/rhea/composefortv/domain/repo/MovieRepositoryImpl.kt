@@ -31,7 +31,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
   }
 
-  override suspend fun getMovies(): Resource<List<Movie>> {
+  override suspend fun getMovies(): Resource<Movies> {
     return try {
       context.assets.open("curated_trays.json").use { inputStream ->
         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
@@ -39,7 +39,7 @@ class MovieRepositoryImpl @Inject constructor(
         val adapter = moshi.adapter(Movies::class.java)
         val movies = adapter.fromJson(bufferedReader.use { it.readText() })
         movies?.let {
-          Resource.Success(it.flatMap { category -> category.movies })
+          Resource.Success(it)
         } ?: Resource.Error(Exception("Parsing error"))
       }
     } catch (e: Exception) {
