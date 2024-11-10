@@ -36,5 +36,3 @@ data class Movie(
   @Json(name = "vote_count")
   val voteCount: Int
 ): Parcelable
-
-class Movies : ArrayList<Category>()
