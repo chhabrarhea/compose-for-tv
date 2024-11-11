@@ -35,4 +35,6 @@ data class Movie(
   val voteAverage: Double,
   @Json(name = "vote_count")
   val voteCount: Int
-): Parcelable
+): Parcelable {
+  fun getFullPosterPath() = "https://www.themoviedb.org/t/p/w500$posterPath"
+}

@@ -1,13 +1,16 @@
 package com.rhea.composefortv.ui.catalog
 
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Card
+import androidx.tv.material3.CardScale
 import coil.compose.AsyncImage
 import com.rhea.composefortv.R
 import com.rhea.composefortv.data.models.Movie
@@ -23,9 +26,10 @@ fun MovieCard(
     modifier = modifier
       .widthIn(max = 320.dp)
       .aspectRatio(16f / 9f),
+    scale = CardScale.None
   ) {
     AsyncImage(
-      model = movie.posterPath,
+      model = movie.getFullPosterPath(),
       contentDescription = movie.overview,
       contentScale = ContentScale.Crop,
       placeholder = painterResource(id = R.drawable.placeholder)
