@@ -8,7 +8,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -26,19 +31,21 @@ fun CatalogBrowser(
 ) {
   val movieResource = catalogBrowserViewModel.allMovies.collectAsStateWithLifecycle()
 
-  Log.d("Rhea", "CatalogBrowser: ${movieResource.value}")
-
   when (movieResource.value) {
     is Resource.Loading -> {
       // Show a loading indicator
     }
 
     is Resource.Success -> {
-      Log.d("Rhea", "CatalogBrowser: ${movieResource.value.data}")
+      val focusRequester = remember { FocusRequester() }
       CatalogBrowserContent(
         trays = movieResource.value.data?.list.orEmpty(),
-        onMovieSelected = onMovieSelected
+        onMovieSelected = onMovieSelected,
+        focusRequester
       )
+      LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+      }
     }
 
     is Resource.Error -> {
@@ -51,11 +58,13 @@ fun CatalogBrowser(
 @Composable
 fun CatalogBrowserContent(
   trays: List<Category>,
-  onMovieSelected: (Movie) -> Unit
+  onMovieSelected: (Movie) -> Unit,
+  focusRequester: FocusRequester
 ) {
   LazyColumn(
     verticalArrangement = Arrangement.spacedBy(16.dp),
-    contentPadding = PaddingValues(horizontal = 48.dp, vertical = 32.dp)
+    contentPadding = PaddingValues(horizontal = 48.dp, vertical = 32.dp),
+    modifier = Modifier.focusRequester(focusRequester)
   ) {
     items(trays) { category ->
       Text(
