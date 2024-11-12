@@ -21,6 +21,7 @@ import androidx.tv.material3.Text
 import com.rhea.composefortv.data.models.Category
 import com.rhea.composefortv.data.models.Movie
 import com.rhea.composefortv.domain.model.Resource
+import com.rhea.composefortv.ui.common.LoadingScreen
 import com.rhea.composefortv.ui.theme.Typography
 
 @Composable
@@ -33,7 +34,7 @@ fun CatalogBrowser(
 
   when (movieResource.value) {
     is Resource.Loading -> {
-      // Show a loading indicator
+      LoadingScreen()
     }
 
     is Resource.Success -> {

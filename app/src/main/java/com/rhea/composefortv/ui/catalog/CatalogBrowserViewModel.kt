@@ -8,6 +8,7 @@ import com.rhea.composefortv.domain.model.Resource
 import com.rhea.composefortv.domain.repo.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ class CatalogBrowserViewModel @Inject constructor(
 
   private fun fetchAllMovies() {
     viewModelScope.launch(ioDispatcher) {
+      delay(2500)
       _allMovies.value = movieRepository.getMovies()
     }
   }
