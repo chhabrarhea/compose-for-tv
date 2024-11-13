@@ -21,6 +21,7 @@ import androidx.tv.material3.Text
 import com.rhea.composefortv.data.models.Category
 import com.rhea.composefortv.data.models.Movie
 import com.rhea.composefortv.domain.model.Resource
+import com.rhea.composefortv.ui.common.ErrorScreen
 import com.rhea.composefortv.ui.common.LoadingScreen
 import com.rhea.composefortv.ui.theme.Typography
 
@@ -50,8 +51,13 @@ fun CatalogBrowser(
     }
 
     is Resource.Error -> {
-      Log.d("Rhea", "CatalogBrowser: ${movieResource.value.error}")
-      // Show an error message
+      val focusRequester = remember { FocusRequester() }
+      ErrorScreen(focusRequester) {
+        catalogBrowserViewModel.retryAllMovies()
+      }
+      LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+      }
     }
   }
 }

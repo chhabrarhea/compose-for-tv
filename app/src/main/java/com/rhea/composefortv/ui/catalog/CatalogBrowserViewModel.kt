@@ -31,7 +31,14 @@ class CatalogBrowserViewModel @Inject constructor(
   private fun fetchAllMovies() {
     viewModelScope.launch(ioDispatcher) {
       delay(2500)
-      _allMovies.value = movieRepository.getMovies()
+      _allMovies.value = Resource.Error(Throwable("Failed to fetch movies"))
+    }
+  }
+
+  fun retryAllMovies() {
+    viewModelScope.launch {
+      _allMovies.emit(Resource.Loading())
+      fetchAllMovies()
     }
   }
 }
